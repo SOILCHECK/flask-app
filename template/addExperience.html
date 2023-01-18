@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Registration Form in HTML CSS</title>
+    <!---Custom CSS File--->
+ 
+  </head>
+  <body>
+    <div class="page-title">SoilCheck</div>
+
+    <section class="container">
+      <header class="form-title">Ajouter mon experience</header>
+      <form action="#" class="form">
+        <h1>Plante choisie</h1>
+        <div class="input-box">
+            <input type="text" placeholder="Plante" name="plante" required />
+          </div>
+          <h1>Métriques :</h1>
+
+        <div class="input-box">
+          <label>Temperature</label>
+          <input type="number" placeholder="Temperature"  name="temperature"  required />
+        </div>
+    <div class="column">
+        <div class="input-box">
+          <label>PH</label>
+          <input type="number" placeholder="Ph " name="ph" required />
+        </div>
+
+        
+        <div class="input-box">
+            <label>Potassium</label>
+            <input type="number" placeholder="Potassium" name="potassium" required />
+        </div>
+    </div>
+    <div class="column">
+        <div class="input-box">
+          <label>phosphorous</label>
+          <input type="number" placeholder="phosphorous"  name="phosphorous"  required />
+        </div>
+
+        
+        <div class="input-box">
+            <label>Nitrogen</label>
+            <input type="number" placeholder="Nitrogen" name="nitrogen" required />
+        </div>
+    </div>
+    <div class="column">
+        <div class="input-box">
+          <label>rainfall</label>
+          <input type="number" placeholder="rainfall" name="rainfall" required />
+        </div>
+
+        
+        <div class="input-box">
+            <label>humidity</label>
+            <input type="number" placeholder="humidity" name="humidity" required />
+        </div>
+    </div>
+    <h1>Description</h1>
+    <div class="input-box">
+        
+        <input type="text" placeholder="Description" name="Description" required />
+    </div>
+    
+        
+        <button>Envoyer</button>
+      </form>
+
+    </section>
+    
+
+  </body>
+  <style>
+    /* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+#ImSticky {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('path/to/poppins.woff2') format('woff2'),
+       url('path/to/poppins.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+.drop-container {
+  position: relative;
+  display: flex;
+  margin: 10px;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #555;
+  color: #444;
+  cursor: pointer;
+}
+
+.drop-container:hover {
+  background: #eee;
+  border-color: #111;
+}
+
+.drop-container:hover .drop-title {
+  color: #222;
+}
+
+.drop-title {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color .2s ease-in-out;
+}
+
+input[type=file] {
+  width: 350px;
+  max-width: 100%;
+  color: #444;
+  padding: 5px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #555;
+}
+
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: rgb(80, 138, 22);;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
+}
+.page-title {
+  position: absolute;
+  font-family: 'Poppins', sans-serif; 
+  top: 50px;
+  left: 30px;
+  padding: 10px;
+  color:rgb(80, 138, 22);
+  font-size: 70px;
+}
+
+.form-title {
+
+  top: 50px;
+  left: 30px;
+  padding: 10px;
+  color:rgb(80, 138, 22);;
+  font-size: 70px;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(rgb(202, 231, 173),rgba(255,255,255,1));
+
+}
+.container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+.container .form {
+  margin-top: 30px;
+}
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+.form .gender-box {
+  margin-top: 20px;
+}
+.gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.form :where(.gender-option, .gender) {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+.form .gender {
+  column-gap: 5px;
+}
+.gender input {
+  accent-color: rgb(80, 138, 22)
+}
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+.gender label {
+  color: #707070;
+}
+.address :where(input, .select-box) {
+  margin-top: 15px;
+}
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+.form button {
+  border: 2px solid rgb(80, 138, 22);
+  border-radius: 25px;
+
+  height: 55px;
+  width: 100%;
+  color: rgb(80, 138, 22);
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+ 
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgb(255, 255, 255)
+}
+.form button:hover {
+  background:rgb(80, 138, 22);
+  color:rgb(255, 255, 255)
+}
+/*Responsive*/
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+  .form :where(.gender-option, .gender) {
+    row-gap: 15px;
+  }
+}
+
+  </style>
+</html>
+

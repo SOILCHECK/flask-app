@@ -1,21 +1,101 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.2/chart.min.js" integrity="sha512-fYE9wAJg2PYbpJPxyGcuzDSiMuWJiw58rKa9MWQICkAqEO+xeJ5hg5qPihF8kqa7tbgJxsmgY0Yp51+IMrSEVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
         {% include 'sidenavbar.html' %}
-        <h2>Bienvenue {{ session['username'] }} !</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus 
-            massa non tortor. Vestibulum diam diam, posuere in viverra in, 
-            ullamcorper et libero. Donec eget libero quis risus congue imperdiet ac 
-            id lectus. Nam euismod cursus arcu, et consequat libero ullamcorper sit 
-            amet.
-            HSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSJKSD
-            DSKJCSDKLHFSDIO
-            DCSDJKFLSD
-            JKJJJJJJJJJJJ
-        </p>
+        <div style="margin-top: 40px;">
+        <span class="soil" style="">Soil</span><span class="check"> Check</span>
+        </div>
+        <h2 class="title">Bienvenue {{ session['username'] }} !</h2>
+        <div style="display:flex;">
+            <canvas id="dw" style="width:100%;max-width:650px;max-height: 450px;margin-left:80px;"></canvas>
+            <canvas id="chart3" style="width:100%;max-width:700px;max-height: 420px;margin-left:20px;"></canvas>
+        </div>
+        <div>
+            <canvas id="myChart" style="width:100%;max-width:1200px;max-height: 400px;margin-left:140px;"></canvas>
+        </div>
+       
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          
+        <script type=text/javascript>
+           let variable= {{ N |tojson}};
+           let m = {{ K |tojson}};
+            const ctx = document.getElementById('myChart');
+            new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ['rice', 'maize', 'chickpea', 'kidneybeans', 'pigeonpeas', 'mothbeans', 'mungbean', 'blackgram', 'lentil', 'pomegranate', 'banana', 'mango', 'grapes', 'watermelon', 'muskmelon', 'apple', 'orange', 'papaya', 'coconut', 'cotton', 'jute', 'coffee'],
+                datasets: [{
+                  label: 'Valeur de Nitrogène ',
+                  data :variable,
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+            const ctx2 = document.getElementById('dw');
+            new Chart(ctx2, {
+              type:'line',
+              data: {
+                labels: ['rice', 'maize', 'chickpea', 'kidneybeans', 'pigeonpeas', 'mothbeans', 'mungbean', 'blackgram', 'lentil', 'pomegranate', 'banana', 'mango', 'grapes', 'watermelon', 'muskmelon', 'apple', 'orange', 'papaya', 'coconut', 'cotton', 'jute', 'coffee'],
+                datasets: [{
+                  label: 'Valeur de kalsium ',
+                  data :m,
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+            const ctx3 = document.getElementById('chart3');
+            new Chart(ctx3, {
+              type:'doughnut',
+              data: {
+                labels: ['rice', 'maize', 'chickpea', 'kidneybeans', 'pigeonpeas', 'mothbeans', 'mungbean', 'blackgram', 'lentil', 'pomegranate', 'banana', 'mango', 'grapes', 'watermelon', 'muskmelon', 'apple', 'orange', 'papaya', 'coconut', 'cotton', 'jute', 'coffee'],
+                datasets: [{
+                  label: 'Valeur de Nitrogène ',
+                  data :variable,
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          </script>
+        
     </body>
+    <style>
+        .title{
+            text-align: center;
+            padding-top: 20px;
+            font-size: xx-large;
+        }
+        .soil{
+            margin-left: 10em;
+            font-size:60px;
+            color: #42b883;
+        }
+        .check{
+            font-size:60px;
+            color: #393e46;
+        }
+    </style>
 </html>

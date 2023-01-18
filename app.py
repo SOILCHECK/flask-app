@@ -69,7 +69,22 @@ def logout() :
 
 @app.route("/", methods=['GET'])
 def home() :
-    return render_template('home.html')
+    data = pd.read_csv("./machine-learning/data_set.csv")
+    labels= data['label']
+    lab=[]
+    for label in labels :
+        if label not in lab:
+            lab.append(label) 
+    grouped_data = data.groupby(by="label").mean().reset_index()
+    N = grouped_data['N'] 
+    K = grouped_data['K'] 
+    kelsium=[]
+    net=[]
+    for val in N :
+        net.append(val)
+    for val in K :
+        kelsium.append(val)
+    return render_template('home.html',lab=lab,N=net,K=kelsium)
 
 @app.route("/plant_rec", methods=['GET'])
 def form() :
@@ -144,7 +159,7 @@ def addExp() :
     cursor.execute("insert into experiences(username, plant, temperature, potassium, nitrogen, ph, phosphorous, rainfall,humidity, description, name, image) values (%s, %s,%s, %s,%s, %s, %s,%s, %s,%s, %s, %s)", [username, plante, ph, temperature, potassium, phosphorous, nitrogen, rainfall,humidity, Description, title, image])
     mysql.connection.commit()
     cursor.close()
-    return render_template('Experiences.html')
+    return userexp()
 
 if __name__ == "__main__":
     app.secret_key = 'secret'

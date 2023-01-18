@@ -10,7 +10,11 @@
  
   </head>
   <body>
-    <div class="page-title">SoilCheck</div>
+    {% include "sidenavbar.html" %}
+    <a href="/addExperience" >
+      <button class="add-button">Ajouter nouvelle experience</button>
+    </a>
+    <div class="page-title"></div>
     {% for row in experiences %}
     <section class="container">
       <header class="form-title"> {{row[10]}} : {{row[9]}}</header>
@@ -150,6 +154,21 @@ body {
   padding: 20px;
   background: linear-gradient(rgb(202, 231, 173),rgba(255,255,255,1));
 
+}
+.add-button {
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  border: 2px solid rgb(80, 138, 22);
+  border-radius: 25px;
+  height: 55px;
+  width: 20%;
+  color: rgb(80, 138, 22);
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgb(255, 255, 255)
 }
 .container {
   position: relative;

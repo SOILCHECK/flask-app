@@ -14,6 +14,10 @@ plants = ['rice','maize','chickpea','kidneybeans','pigeonpeas','corn','mothbeans
 
 input = []
 
+@app.route("/", methods=['GET'])
+def home() :
+    return render_template('home.html')
+
 @app.route("/plant_rec", methods=['GET'])
 def form() :
     return render_template('form.html')
@@ -44,8 +48,11 @@ def result() :
     plant_predicted = plants[predicted[0]].capitalize()
 
     cur = mysql.connection.cursor()
+    image = ""
+    description = ""
     cur.execute("select * from plants where name = %s", [plant_predicted])
-    [name,image,description] = cur.fetchone()
+    if cur.rowcount != 0 :
+        [name,image,description] = cur.fetchone()
     cur.close()
     return render_template('PlantDescription.html', plant=plant_predicted, desc=description, image=image)
 

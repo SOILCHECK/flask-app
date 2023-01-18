@@ -16,9 +16,12 @@
       <header class="form-title">Plante recommandée</header>
       <h2> {{ plant }}</h2>  
        <div class="plantImage">
+        {% if image != "" %}
         <img id="ImSticky" src="{{ image }}" />     
+        {% endif %}
+        {% if desc != "" %}
          <p> {{ desc }} </p>
-         
+        {% endif %}
       </div>
     
     </section>

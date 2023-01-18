@@ -18,6 +18,10 @@ input = []
 def form() :
     return render_template('form.html')
 
+@app.route("/", methods=['GET'])
+def home() :
+    return render_template('home.html')
+
 @app.route("/plant_rec", methods=['POST'])
 def result() : 
     temperature = request.form['temperature']

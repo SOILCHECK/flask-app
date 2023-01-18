@@ -16,8 +16,8 @@
       <header class="form-title">Plante recommandée</header>
       <h2> {{ plant }}</h2>  
        <div class="plantImage">
-        <img id="ImSticky" src="../static/images/v1_5.png" />     
-         <p>description de la plante description de la plante description de la plantedescription </p>
+        <img id="ImSticky" src="{{ image }}" />     
+         <p> {{ desc }} </p>
          
       </div>
     
@@ -39,6 +39,7 @@
   right: 0;
   width: 150px;
   height: 150px;
+  border-radius: 50px;
 }
 .plantImage{
     display: flex;

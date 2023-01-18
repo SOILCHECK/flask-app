@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request
 import pickle
-import csv
 import pandas as pd 
+from config import Config
+from flask_mysqldb import MySQL
 
 app=Flask(__name__,template_folder='./template')
+
+app.config.from_object(Config)
+mysql = MySQL(app)
 
 plants = ['rice','maize','chickpea','kidneybeans','pigeonpeas','corn','mothbeans','mungbean','blackgram','lentil','pomegranate',
 'banana','mango','grapes','tomato','watermelon','muskmelon','apple','orange','papaya','coconut','cotton','jute','weed','coffee']
@@ -38,7 +42,12 @@ def result() :
         predicted = model.predict(([[input[0], input[1], input[2], input[3], input[4], input[5], input[6]]]))
                 
     plant_predicted = plants[predicted[0]].capitalize()
-    return render_template('PlantDescription.html', plant=plant_predicted)
+
+    cur = mysql.connection.cursor()
+    cur.execute("select * from plants where name = %s", [plant_predicted])
+    [name,image,description] = cur.fetchone()
+    cur.close()
+    return render_template('PlantDescription.html', plant=plant_predicted, desc=description, image=image)
 
 
 if __name__ == "__main__":

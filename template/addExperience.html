@@ -14,7 +14,11 @@
 
     <section class="container">
       <header class="form-title">Ajouter mon experience</header>
-      <form action="#" class="form">
+      <form action="/addExperience" method="post" class="form" enctype="multipart/form-data">
+        <h1>Titre de l'expérience</h1>
+        <div class="input-box">
+            <input type="text" placeholder="Nom" name="title" required />
+          </div>
         <h1>Plante choisie</h1>
         <div class="input-box">
             <input type="text" placeholder="Plante" name="plante" required />
@@ -68,7 +72,7 @@
     </div>
     
         
-        <button>Envoyer</button>
+        <button type="submit">Envoyer</button>
       </form>
 
     </section>

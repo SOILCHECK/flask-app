@@ -11,27 +11,27 @@
   </head>
   <body>
     <div class="page-title">SoilCheck</div>
-    {% for item in items %}
+    {% for row in experiences %}
     <section class="container">
-      <header class="form-title">Experience title</header>
+      <header class="form-title"> {{row[10]}} : {{row[9]}}</header>
         
       
-      <h2>userName</h2>  
+      <h2> {{ row[0] }} </h2>  
        <div class="plantImage">
-        <img id="ImSticky" src="../static/images/v1_5.png" />  
+        <img id="ImSticky" src="{{ row[11] }}" />  
     
-         <p>description de la plante description de la plante description de la plantedescription </p>
+         <p> {{ row[8] }} </p>
       </div>
       <div  class="Metriques">
         <h2>Metriques utilsées :</h2>
         <ul>
-            <li>Temperature : 0</li>
-            <li>PH :0</li>
-            <li>phosphorous</li>
-            <li>rainfall</li>
-            <li>humidity</li>
-            <li>Nitrogen</li>
-            <li>Potassium</li>
+            <li>Temperature : {{ row[1] }} </li>
+            <li>PH : {{ row[4] }}</li>
+            <li>phosphorous : {{ row[5] }}</li>
+            <li>rainfall : {{ row[6] }}</li>
+            <li>humidity : {{ row[7] }}</li>
+            <li>Nitrogen : {{ row[3] }}</li>
+            <li>Potassium : {{ row[2] }}</li>
           </ul>
           
       </div>

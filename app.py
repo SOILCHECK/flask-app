@@ -111,14 +111,18 @@ def result() :
 
 @app.route("/Experiences", methods=['GET'])
 def userexp() :
-    cur = mysql.connection().cursor()
-    cur.execute("SELECT * FROM users")
+    cur = mysql.connection.cursor()
+    cur.execute("select * FROM experiences")
     data = cur.fetchall()
     cur.close()
     return render_template('Experiences.html', experiences=data)
 
+@app.route("/addExperience", methods=['GET'])
+def addExpPage() : 
+    return render_template('addExperience.html')
+
 @app.route("/addExperience", methods=['POST'])
-def signup() :
+def addExp() :
     plante = request.form['plante']
     ph = request.form['ph']
     temperature = request.form['temperature']
@@ -128,8 +132,16 @@ def signup() :
     rainfall= request.form['rainfall']
     humidity = request.form['humidity']
     Description = request.form['Description']
+    title = request.form['title']
+    username = session['username']
+
+    cur = mysql.connection.cursor()
+    cur.execute("select * from plants where name = %s", [plante])
+    image = cur.fetchone()[1]
+    cur.close()
     
-    cursor.execute("insert into experiences(plante, ph, temperature, potassium, phosphorous, nitrogen, rainfall,humidity, Description ) values (%f, %f,%f, %f,%f, %f,%f, %f,%f)", [plante, ph, temperature, potassium, phosphorous, nitrogen, rainfall,humidity, Description])
+    cursor = mysql.connection.cursor()
+    cursor.execute("insert into experiences(username, plant, temperature, potassium, nitrogen, ph, phosphorous, rainfall,humidity, description, name, image) values (%s, %s,%s, %s,%s, %s, %s,%s, %s,%s, %s, %s)", [username, plante, ph, temperature, potassium, phosphorous, nitrogen, rainfall,humidity, Description, title, image])
     mysql.connection.commit()
     cursor.close()
     return render_template('Experiences.html')

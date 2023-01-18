@@ -21,7 +21,6 @@ def loginPage() :
 @app.route("/login", methods=['POST'])
 def login() : 
     username = request.form['username']
-    email = request.form['email']
     password = request.form['password']
 
     cursor = mysql.connection.cursor()
@@ -31,6 +30,7 @@ def login() :
         session['loggedin'] = True
         session['id'] = id
         session['username'] = username
+        cursor.close()
         return render_template('home.html', session=session)
     else : 
         message = "Nom d'utilisateur ou mot de passe incorrect"
@@ -39,6 +39,26 @@ def login() :
 @app.route("/signup", methods=['GET'])
 def signupPage() : 
     return render_template('signup.html')
+
+@app.route("/signup", methods=['POST'])
+def signup() :
+    username = request.form['username']
+    password = request.form['password']
+    password2 = request.form['password2']
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("select * from accounts where username = %s ", [username])
+    if cursor.rowcount != 0 : 
+        message = "Un utilisateur avec ce nom d'utilisateur existe déjà"
+        return render_template('signup.html', message=message)
+    if password != password2 :
+        message = "Veuillez confirmer votre mot de passe correctement !"
+        return render_template('signup.html', message=message)
+    
+    cursor.execute("insert into accounts(username, password) values (%s, %s)", [username, password])
+    mysql.connection.commit()
+    cursor.close()
+    return render_template('login.html')
 
 @app.route("/", methods=['GET'])
 def home() :

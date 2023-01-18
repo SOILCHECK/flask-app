@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import pickle
 import pandas as pd 
 from config import Config
@@ -14,13 +14,39 @@ plants = ['rice','maize','chickpea','kidneybeans','pigeonpeas','corn','mothbeans
 
 input = []
 
-@app.route("/plant_rec", methods=['GET'])
-def form() :
-    return render_template('form.html')
+@app.route("/login", methods=['GET'])
+def loginPage() :
+    return render_template('login.html')
+
+@app.route("/login", methods=['POST'])
+def login() : 
+    username = request.form['username']
+    email = request.form['email']
+    password = request.form['password']
+
+    cursor = mysql.connection.cursor()
+    cursor.execute("select * from accounts where username = %s and password = %s", [username, password])
+    if cursor.rowcount != 0 :
+        [id,username,password] = cursor.fetchone()
+        session['loggedin'] = True
+        session['id'] = id
+        session['username'] = username
+        return render_template('home.html', session=session)
+    else : 
+        message = "Nom d'utilisateur ou mot de passe incorrect"
+        return render_template('login.html', message=message)
+
+@app.route("/signup", methods=['GET'])
+def signupPage() : 
+    return render_template('signup.html')
 
 @app.route("/", methods=['GET'])
 def home() :
     return render_template('home.html')
+
+@app.route("/plant_rec", methods=['GET'])
+def form() :
+    return render_template('form.html')
 
 @app.route("/plant_rec", methods=['POST'])
 def result() : 
@@ -35,7 +61,7 @@ def result() :
     file = request.files['file']
 
     plants.sort()
-    model = pickle.load(open('model.pkl','rb'))
+    model = pickle.load(open('./machine-learning/model.pkl','rb'))
 
     if temperature != '' and ph != '' and potassium != '' and phosphorous != '' and nitrogen != '' and rainfall != '' and humidity != '' : 
         predicted = model.predict(([[nitrogen, phosphorous, potassium, temperature, humidity, ph, rainfall]]))
@@ -58,4 +84,6 @@ def result() :
 
 
 if __name__ == "__main__":
+    app.secret_key = 'secret'
+    app.config['SESSION_TYPE'] = 'filesystem'
     app.run(debug=True)

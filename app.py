@@ -14,10 +14,6 @@ plants = ['rice','maize','chickpea','kidneybeans','pigeonpeas','corn','mothbeans
 
 input = []
 
-@app.route("/", methods=['GET'])
-def home() :
-    return render_template('home.html')
-
 @app.route("/plant_rec", methods=['GET'])
 def form() :
     return render_template('form.html')

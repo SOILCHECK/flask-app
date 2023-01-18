@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Registration Form in HTML CSS</title>
+    <title>SOIL CHECK</title>
     <!---Custom CSS File--->
  
   </head>
@@ -14,56 +14,48 @@
 
     <section class="container">
       <header class="form-title">Entrer les conditions de votre sol ici </header>
-      <form action="#" class="form">
+      <form action="/plant_rec" method="post" class="form" enctype="multipart/form-data">
         <div class="input-box">
           <label>Temperature</label>
-          <input type="number" placeholder="Temperature" required />
+          <input type="number" placeholder="Temperature" name="temperature" step=any />
         </div>
-    <div class="column">
-        <div class="input-box">
-          <label>PH</label>
-          <input type="number" placeholder="Ph " required />
+        <div class="column">
+            <div class="input-box">
+              <label>PH</label>
+              <input type="number" placeholder="Ph" name="ph" step=any />
+            </div>
+            <div class="input-box">
+                <label>Potassium</label>
+                <input type="number" placeholder="Potassium" name="potassium" />
+            </div>
         </div>
+        <div class="column">
+            <div class="input-box">
+              <label>phosphorous</label>
+              <input type="number" placeholder="phosphorous" name="phosphorous" />
+            </div>
 
-        
-        <div class="input-box">
-            <label>Potassium</label>
-            <input type="number" placeholder="Potassium" required />
+            
+            <div class="input-box">
+                <label>Nitrogen</label>
+                <input type="number" placeholder="Nitrogen" name="nitrogen" />
+            </div>
         </div>
-    </div>
-    <div class="column">
-        <div class="input-box">
-          <label>phosphorous</label>
-          <input type="number" placeholder="phosphorous" required />
+        <div class="column">
+            <div class="input-box">
+              <label>rainfall</label>
+              <input type="number" placeholder="rainfall" name="rainfall" step=any/>
+            </div>            
+            <div class="input-box">
+                <label>humidity</label>
+                <input type="number" placeholder="humidity" name="humidity" step=any/>
+            </div>
         </div>
-
-        
-        <div class="input-box">
-            <label>Nitrogen</label>
-            <input type="number" placeholder="Nitrogen" required />
+        <div class="drop-container">
+          <span class="drop-title">Charger votre fichier</span>
+          <input type="file" id="images" accept="pdf/*" name="file">
         </div>
-    </div>
-    <div class="column">
-        <div class="input-box">
-          <label>rainfall</label>
-          <input type="number" placeholder="rainfall" required />
-        </div>
-
-        
-        <div class="input-box">
-            <label>humidity</label>
-            <input type="number" placeholder="humidity" required />
-        </div>
-    </div>
-    <label for="images" class="drop-container">
-        <span class="drop-title">Charger votre fichier</span>
-        ou
-        <input type="file" id="images" accept="pdf/*" required>
-      </label>
-    
-    
-        
-        <button>Envoyer</button>
+        <button type="submit">Envoyer</button>
       </form>
 
     </section>
@@ -104,7 +96,6 @@
   border-radius: 10px;
   border: 2px dashed #555;
   color: #444;
-  cursor: pointer;
 }
 
 .drop-container:hover {

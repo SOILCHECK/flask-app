@@ -60,6 +60,13 @@ def signup() :
     cursor.close()
     return render_template('login.html')
 
+@app.route("/out", methods=['GET'])
+def logout() : 
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('username', None)
+   return render_template('login.html')
+
 @app.route("/", methods=['GET'])
 def home() :
     return render_template('home.html')
@@ -102,6 +109,30 @@ def result() :
     cur.close()
     return render_template('PlantDescription.html', plant=plant_predicted, desc=description, image=image)
 
+@app.route("/Experiences", methods=['GET'])
+def userexp() :
+    cur = mysql.connection().cursor()
+    cur.execute("SELECT * FROM users")
+    data = cur.fetchall()
+    cur.close()
+    return render_template('Experiences.html', experiences=data)
+
+@app.route("/addExperience", methods=['POST'])
+def signup() :
+    plante = request.form['plante']
+    ph = request.form['ph']
+    temperature = request.form['temperature']
+    potassium = request.form['potassium']
+    phosphorous = request.form['phosphorous']
+    nitrogen = request.form['nitrogen']
+    rainfall= request.form['rainfall']
+    humidity = request.form['humidity']
+    Description = request.form['Description']
+    
+    cursor.execute("insert into experiences(plante, ph, temperature, potassium, phosphorous, nitrogen, rainfall,humidity, Description ) values (%f, %f,%f, %f,%f, %f,%f, %f,%f)", [plante, ph, temperature, potassium, phosphorous, nitrogen, rainfall,humidity, Description])
+    mysql.connection.commit()
+    cursor.close()
+    return render_template('Experiences.html')
 
 if __name__ == "__main__":
     app.secret_key = 'secret'
